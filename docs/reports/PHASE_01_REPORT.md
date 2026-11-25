@@ -62,6 +62,7 @@ Local toolchain included Node 26.13.1, pnpm 11.25.0, Rust 1.98.0, GTK 3.24.52 an
 | `pnpm desktop dev --no-watch` on a private display                                                  | Vite and WebKitGTK started, and a keyboard toggle reached the isolated SQLite database                                                                    |
 | `pnpm desktop build --debug --no-bundle -- --locked --offline`                                      | Native development-profile executable built                                                                                                               |
 | `pnpm desktop build --no-bundle -- --locked --offline`                                              | Native optimized executable built                                                                                                                         |
+| Production browser preview                                                                          | Pointer dragging resized all three dividers. Sizes survived reload, and opening a mathematical environment made zero external requests.                   |
 | Native release smoke, temporary XDG profile                                                         | Two launches verified the log toggle through real keyboard input, Tauri IPC and durable SQLite state. The native command palette opened Logic Playground. |
 | `pnpm peers check`, `pnpm audit --prod`                                                             | No peer mismatches or known production advisories at the time of the check                                                                                |
 | Staged path and blob inspection, `git diff --cached --check`                                        | Reviewed file inventory, native capabilities, workflow permissions, lockfiles, credential patterns and personal paths                                     |
@@ -82,7 +83,7 @@ Only the local main window receives the two application preference commands. Rus
 
 ## Git and publication
 
-Implementation commit `73841ba` introduces the desktop application, logic engine, tests, decisions and CI. The documentation commit titled **Document Phase 01 architecture, verification and roadmap** adds the project guide, screenshots and this report. The public repository uses the `main` branch. [NumenDev/axiom](https://github.com/NumenDev/axiom) · [Implementation commit](https://github.com/NumenDev/axiom/commit/73841ba7194cd03ae59a1f68d88b10611a8b74a6) · [Hosted verification](https://github.com/NumenDev/axiom/actions/workflows/verify.yml)
+Implementation commit `73841ba` introduces the desktop application, logic engine, tests, decisions and CI. Documentation commit `71c5efd` adds the project guide, screenshots and this report. The follow-up **Use supported Node 24 actions for hosted verification** updates the pinned CI actions after GitHub reported a runtime deprecation. The public repository uses the `main` branch. [NumenDev/axiom](https://github.com/NumenDev/axiom) · [Implementation commit](https://github.com/NumenDev/axiom/commit/73841ba7194cd03ae59a1f68d88b10611a8b74a6) · [Hosted verification](https://github.com/NumenDev/axiom/actions/workflows/verify.yml)
 
 ## Proposed Phase 02 acceptance
 
