@@ -8,7 +8,7 @@ export const examples = [
   {
     name: 'Variable substitution',
     source: '3*x^2 + 1/2',
-    explanation: 'Substitute 2 for x, then square it before multiplying by 3.',
+    explanation: 'Square the bound value of x before multiplying by 3 and adding one half.',
     bindings: [{ name: 'x', value: '2' }],
   },
   {
@@ -159,7 +159,8 @@ export function useExpression() {
     setBindings((previous) => [...previous.filter((b) => b.name !== name), { name, value }])
   }
   function evaluate() {
-    if (expr && !inputError) {
+    setInputError(null)
+    if (expr) {
       const result = evaluateExpression(
         expr,
         bindings.filter((b) => b.value !== ''),

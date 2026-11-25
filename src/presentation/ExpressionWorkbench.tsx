@@ -89,7 +89,14 @@ function Trace({
           const symbol = symbols[step.operation]
           const operation =
             step.inputs.length === 2
-              ? step.inputs.map(exactText).join(' ' + symbol + ' ')
+              ? step.inputs
+                  .map((value) => {
+                    const text = exactText(value)
+                    return value.denominator !== '1' || text.startsWith('-')
+                      ? '(' + text + ')'
+                      : text
+                  })
+                  .join(' ' + symbol + ' ')
               : step.inputs.length === 1
                 ? symbol + '(' + exactText(step.inputs[0]!) + ')'
                 : expr.source.slice(step.span.start, step.span.end)

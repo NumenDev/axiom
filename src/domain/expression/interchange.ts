@@ -86,6 +86,14 @@ function checkEnvelope(json: string) {
         if (names.has(key)) invalid()
         names.add(key)
       }
+    } else if (ch && /[0-9.-]/.test(ch)) {
+      // All unquoted v1 numbers are source offsets or node indices. Check their
+      // spelling before the host JSON decoder can round a fraction to an integer.
+      const start = i
+      while (i + 1 < json.length && /[0-9eE.+-]/.test(json[i + 1]!)) i++
+      const digits = json.slice(start, i + 1)
+      if (digits.length > String(limits.source).length || !/^(0|[1-9][0-9]*)$/.test(digits))
+        invalid()
     } else if (ch === '{' || ch === '[') {
       if (containers.length >= 4)
         reject('resource-limit', 'Serialized records exceed the wire nesting limit.')

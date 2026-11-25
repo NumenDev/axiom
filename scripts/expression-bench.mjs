@@ -23,6 +23,7 @@ const workloads = [
   ['Rational', '(13/17 + 29/31)^-40'],
   ['Many names', balanced(names)],
   ['Large tree', full],
+  ['Large exact trace', Array(7).fill('(2^1024/3^1024)').join('+')],
   ['Trace growth', Array(12).fill('(2^1024/3^1024)').join('+')],
   ['Source cap', '1'.padStart(2048)],
   ['Long chain', Array(200).fill('1').join('+')],

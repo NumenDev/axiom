@@ -146,6 +146,10 @@ describe('independent exact expectations', () => {
 })
 describe('interchange and trace', () => {
   it('round trips decimal source, canonical numbers and stable IDs', () => {
+    const wire = good(serialize(ast('2')))
+    for (const number of ['1.00000000000000001', '1e0', '1.0', '-0']) {
+      failure(deserialize(wire.replace('"end":1', '"end":' + number)), 'invalid-serialization')
+    }
     const original = ast(' (+001.20 / a) ')
     const json = good(serialize(original))
     expect(good(deserialize(json))).toEqual(original)
