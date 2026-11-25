@@ -1,0 +1,53 @@
+{
+  "name": "axiom-research-environment",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 1420 --strictPort",
+    "build": "pnpm typecheck && vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "desktop": "tauri"
+  },
+  "dependencies": {
+    "@fontsource-variable/ibm-plex-sans": "^5",
+    "@fontsource/ibm-plex-mono": "^5",
+    "@tauri-apps/api": "^2",
+    "katex": "^0.19.1",
+    "lucide-react": "^0.577.0",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10",
+    "@playwright/test": "^1.56",
+    "@tauri-apps/cli": "^2",
+    "@testing-library/dom": "^10.4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16",
+    "@testing-library/user-event": "^14",
+    "@types/node": "^24",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^5",
+    "eslint": "^10",
+    "eslint-plugin-react-hooks": "^7.1",
+    "globals": "^16",
+    "jsdom": "^27",
+    "prettier": "^3",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8",
+    "vite": "^7",
+    "vitest": "^4"
+  }
+}

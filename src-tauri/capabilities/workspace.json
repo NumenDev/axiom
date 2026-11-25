@@ -1,0 +1,6 @@
+{
+  "identifier": "workspace",
+  "description": "Local main window may read and write typed workspace preferences.",
+  "windows": ["main"],
+  "permissions": ["allow-load-preferences", "allow-save-preferences"]
+}
