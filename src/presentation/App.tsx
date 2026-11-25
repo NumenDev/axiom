@@ -29,6 +29,8 @@ import { Logic, initialLogic, type LogicState, truth } from './Logic'
 import { logicText } from './logicText'
 import { Explorer, Inspector, Status } from './Panels'
 import { Reference } from './Reference'
+import { useExpression } from './expressionModel'
+import { ExpressionWorkbench } from './ExpressionWorkbench'
 import { Welcome } from './Welcome'
 import { pages, type Page } from './navigation'
 import { IconButton, Splitter } from './primitives'
@@ -49,6 +51,7 @@ export default function App() {
   const { layout, setLayout, status } = usePreferences()
   const [active, setActive] = useState<Page>('welcome')
   const [tabs, setTabs] = useState<Page[]>(['welcome'])
+  const expression = useExpression()
   const [logic, setLogic] = useState(initialLogic)
   const [dialog, setDialog] = useState<'commands' | 'settings' | null>(null)
   const [drawer, setDrawer] = useState<'explorer' | 'inspector' | null>(null)
@@ -305,6 +308,8 @@ export default function App() {
           <div role="tabpanel" id={'pane-' + active} aria-labelledby={'tab-' + active}>
             {active === 'welcome' ? (
               <Welcome open={open} />
+            ) : active === 'expression' ? (
+              <ExpressionWorkbench s={expression} note={note} />
             ) : active === 'logic' ? (
               <Logic state={logic} update={changeLogic} />
             ) : (
@@ -344,7 +349,12 @@ export default function App() {
           aria-label="Inspector"
           className={'inspector side' + (narrowInspector ? ' drawer' : '')}
         >
-          <Inspector active={active} state={logic} close={() => toggle('inspector')} />
+          <Inspector
+            active={active}
+            state={logic}
+            expression={expression}
+            close={() => toggle('inspector')}
+          />
           {!narrowInspector && (
             <Splitter
               name="Inspector width"

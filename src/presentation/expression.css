@@ -1,0 +1,391 @@
+.module + .module {
+  margin-top: 12px;
+}
+.expression-page h1 {
+  margin: 12px 0 18px;
+}
+.example-line,
+.editor-head,
+.compute-bar,
+.result-actions,
+.analysis-nav,
+.example-line label,
+.copy-result,
+.analysis-nav > div,
+.source-location,
+.source-location button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.example-line,
+.editor-head,
+.analysis-nav,
+.result-actions {
+  justify-content: space-between;
+}
+.example-line label,
+.concept,
+.result-actions,
+.analysis-view > p {
+  color: var(--soft);
+  font-size: 13px;
+}
+.example-line select,
+.bindings input,
+.copy-result input {
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: var(--raised);
+  border-radius: 3px;
+  padding: 5px 8px;
+}
+.concept {
+  margin: 8px 0 0;
+}
+.expression-sheet {
+  margin-top: 17px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 4px;
+}
+.editor-head {
+  align-items: baseline;
+  padding: 13px 16px 7px;
+}
+.expression-page .field-label {
+  font-family: var(--mono);
+  color: var(--muted);
+}
+.syntax-help {
+  max-width: 65%;
+  text-align: right;
+  color: var(--soft);
+  font-size: 12px;
+}
+.syntax-help summary,
+.syntax-tree summary {
+  cursor: pointer;
+}
+.syntax-help p {
+  text-align: left;
+  margin: 6px 0;
+}
+.expression-sheet textarea {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 0 16px;
+  resize: vertical;
+  min-height: 48px;
+  max-height: 200px;
+  line-height: 1.5;
+  font: 16px/1.55 var(--mono);
+  padding: 8px 11px;
+  border: 1px solid #49544c;
+  border-radius: 3px;
+  color: var(--text);
+  background: var(--bg);
+}
+.expression-sheet textarea:focus-visible,
+.syntax-help summary:focus-visible,
+.syntax-tree summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.source-location {
+  font: 11px var(--mono);
+  padding: 8px 16px 0;
+  flex-wrap: wrap;
+}
+.source-location button {
+  color: var(--math);
+  font: inherit;
+}
+.source-location code,
+.inspected-source,
+.properties dd,
+.trace-list code,
+.trace-list strong,
+.syntax-tree code {
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.source-location mark {
+  background: #514436;
+  color: #f8e6ce;
+}
+.bindings {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 12px 16px 0;
+}
+.bindings label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.bindings code {
+  font: 12px var(--mono);
+  color: var(--math);
+  overflow-wrap: anywhere;
+}
+.bindings input {
+  width: 9ch;
+  font: 13px var(--mono);
+}
+.bindings small,
+.math-diagnostic {
+  color: var(--warm);
+}
+.compute-bar {
+  padding: 12px 16px;
+}
+.compute-bar .primary {
+  margin: 0;
+}
+.compute-bar kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.math-reading {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  padding: 16px;
+  gap: 16px;
+}
+.math-preview {
+  overflow: auto;
+  font-size: 22px;
+  padding: 8px 2px 6px;
+  color: var(--math);
+  max-height: 190px;
+}
+.exact-reading {
+  border-left: 1px solid var(--line);
+  padding-left: 18px;
+}
+.exact-reading output {
+  display: block;
+  font: 25px/1.45 var(--mono);
+  color: var(--accent);
+  overflow-wrap: anywhere;
+  max-height: 150px;
+  overflow: auto;
+}
+.exact-reading p,
+.exact-reading small,
+.copy-result small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.exact-reading p {
+  margin-top: 8px;
+}
+.result-actions {
+  font-size: 12px;
+  margin: 8px 0 0;
+  flex-wrap: wrap;
+}
+.copy-result {
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+.copy-result small:empty {
+  display: none;
+}
+.math-diagnostic {
+  border-top: 1px solid #544938;
+  background: #28251f;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 11px 16px;
+}
+.math-diagnostic strong,
+.math-diagnostic code {
+  display: block;
+  font-size: 13px;
+}
+.math-diagnostic code,
+.expression-inspector section > code:not(.inspected-source) {
+  font: 10px var(--mono);
+  margin-top: 4px;
+}
+.analysis-view {
+  margin-top: 22px;
+}
+.analysis-nav {
+  border-bottom: 1px solid var(--line);
+  gap: 4px;
+}
+.analysis-nav > div {
+  gap: 0;
+}
+.analysis-nav button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 11px;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  font-size: 13px;
+}
+.analysis-nav button[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.syntax-tree,
+.trace-list {
+  max-height: 330px;
+  overflow: auto;
+  padding: 9px 4px;
+  scrollbar-width: thin;
+}
+.syntax-tree,
+.syntax-tree ul,
+.trace-list {
+  list-style: none;
+}
+.syntax-tree ul {
+  margin: 0 0 0 13px;
+  padding: 0 0 0 17px;
+  border-left: 1px solid #414b44;
+}
+.syntax-tree li {
+  position: relative;
+}
+.syntax-tree ul > li:before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -17px;
+  width: 16px;
+  border-top: 1px solid #414b44;
+}
+.syntax-tree button {
+  display: inline-flex;
+  gap: 10px;
+  align-items: baseline;
+  text-align: left;
+  padding: 4px 8px;
+  min-height: 29px;
+  color: var(--soft);
+  font-size: 12px;
+}
+.syntax-tree code {
+  color: var(--math);
+  min-width: 20px;
+  font: 14px var(--mono);
+}
+.syntax-tree small,
+.trace-list small {
+  font: 10px var(--mono);
+  color: var(--muted);
+}
+.syntax-tree button[aria-pressed='true'],
+.trace-list button[aria-pressed='true'] {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.syntax-tree summary {
+  margin-left: 14px;
+  font-size: 12px;
+  color: var(--soft);
+}
+.trace-list button {
+  width: 100%;
+  display: grid;
+  align-items: baseline;
+  grid-template-columns: 24px minmax(70px, 0.8fr) minmax(0, 2fr) 20px minmax(0, 1fr);
+  gap: 8px;
+  text-align: left;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--hair);
+  font-size: 12px;
+}
+.trace-list strong,
+.trace-list code {
+  font: 13px var(--mono);
+  color: var(--math);
+}
+.trace-list strong {
+  color: var(--accent);
+}
+.inspected-source {
+  display: block;
+  margin-top: 14px;
+  color: var(--math);
+  font: 14px var(--mono);
+  max-height: 120px;
+  overflow: auto;
+}
+.expression-inspector .properties dt {
+  flex-shrink: 0;
+}
+@container (max-width: 480px) {
+  .analysis-nav button {
+    padding: 8px 5px;
+    font-size: 12px;
+  }
+  .math-reading {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .exact-reading {
+    border: none;
+    padding: 0;
+  }
+  .trace-list button {
+    grid-template-columns: 20px minmax(0, 1fr) 12px minmax(0, 1fr);
+  }
+  .trace-list button > span:nth-child(2) {
+    display: none;
+  }
+}
+
+.expression-title,
+.expression-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.expression-title .meta {
+  white-space: nowrap;
+}
+.example-line {
+  justify-content: flex-start;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+.example-line label {
+  flex-shrink: 0;
+}
+.example-line .concept {
+  margin: 0;
+  flex: 1 1 240px;
+  line-height: 1.4;
+}
+.expression-controls {
+  padding: 10px 16px;
+}
+.expression-controls .bindings,
+.expression-controls .compute-bar {
+  padding: 0;
+}
+.expression-controls .compute-bar {
+  margin-left: auto;
+}
+.expression-sheet textarea {
+  min-height: 44px;
+}
+.expression-page .syntax-tree,
+.expression-page .trace-list {
+  margin: 0;
+}

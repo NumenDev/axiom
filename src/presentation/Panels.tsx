@@ -26,17 +26,26 @@ import { evaluate } from '../domain/logic'
 import { logicText } from './logicText'
 import { truth, type LogicState } from './Logic'
 import { desktop } from '../application/preferences'
-import { modules } from '../application/modules'
+import { ExpressionInspector } from './ExpressionWorkbench'
+import type { Session } from './expressionModel'
+import { logicModule, expressionModule, modules } from '../application/modules'
 import manifest from '../../package.json'
 
 export function Explorer({ active, open }: { active: Page; open: OpenPage }) {
-  const [expanded, setExpanded] = useState({ workspace: true, resources: true, discrete: true })
+  const [expanded, setExpanded] = useState({
+    workspace: true,
+    resources: true,
+    discrete: true,
+    foundations: true,
+  })
   function group(key: keyof typeof expanded, label: string, Icon: LucideIcon) {
     const Twist = expanded[key] ? ChevronDown : ChevronRight
     return (
       <button
         aria-expanded={expanded[key]}
-        className={'group-toggle ' + (key === 'discrete' ? 'subgroup' : '')}
+        className={
+          'group-toggle ' + (key === 'discrete' || key === 'foundations' ? 'subgroup' : '')
+        }
         onClick={() => setExpanded((v) => ({ ...v, [key]: !v[key] }))}
       >
         <Twist size={13} />
@@ -71,7 +80,9 @@ export function Explorer({ active, open }: { active: Page; open: OpenPage }) {
           <div className="tree-branch">
             {item('welcome')}
             {group('discrete', 'Discrete mathematics', Folder)}
-            {expanded.discrete && modules.map((m) => item(m.id, true))}
+            {expanded.discrete && item(logicModule.id, true)}
+            {group('foundations', expressionModule.field, Folder)}
+            {expanded.foundations && item(expressionModule.id, true)}
           </div>
         )}
         {group('resources', 'Resources', BookOpen)}
@@ -104,9 +115,11 @@ function Property({ name, value }: { name: string; value: string }) {
 export function Inspector({
   active,
   state,
+  expression,
   close,
 }: {
   active: Page
+  expression: Session
   state: LogicState
   close: () => void
 }) {
@@ -120,99 +133,103 @@ export function Inspector({
         <span>Inspector</span>
         <IconButton label="Hide inspector" icon={PanelRightClose} onClick={close} />
       </div>
-      <div className="inspector-body">
-        <section className="inspect-block">
-          <div className="eyebrow">
-            <Info size={13} />
-            {isLogic ? 'Selection' : 'Overview'}
-          </div>
-          <div className="object-name">
-            <span className="object-icon">
-              <Glyph size={19} />
-            </span>
-            <div>
-              <strong>{isLogic ? spec.name : 'Local workspace'}</strong>
-              <small>{isLogic ? 'Logical operator' : 'Workspace properties'}</small>
+      {active === 'expression' ? (
+        <ExpressionInspector s={expression} />
+      ) : (
+        <div className="inspector-body">
+          <section className="inspect-block">
+            <div className="eyebrow">
+              <Info size={13} />
+              {isLogic ? 'Selection' : 'Overview'}
             </div>
-          </div>
-          <dl className="properties">
+            <div className="object-name">
+              <span className="object-icon">
+                <Glyph size={19} />
+              </span>
+              <div>
+                <strong>{isLogic ? spec.name : 'Local workspace'}</strong>
+                <small>{isLogic ? 'Logical operator' : 'Workspace properties'}</small>
+              </div>
+            </div>
+            <dl className="properties">
+              {isLogic ? (
+                <>
+                  <Property name="Domain" value="Boolean" />
+                  <Property name="Arity" value={spec.arity} />
+                  <Property name="Result kind" value="Exact" />
+                  <Property name="Engine" value={result.engine} />
+                </>
+              ) : (
+                <>
+                  <Property name="Environment" value={desktop ? 'Desktop' : 'Web preview'} />
+                  <Property name="Storage" value={desktop ? 'SQLite' : 'Browser local'} />
+                  <Property name="Version" value={'v' + manifest.version} />
+                </>
+              )}
+            </dl>
+          </section>
+          <section className="inspect-block">
+            <div className="eyebrow">
+              {isLogic ? <CircleDot size={13} /> : <Boxes size={14} />}{' '}
+              {isLogic ? 'Evaluation' : 'Environment index'}
+            </div>
             {isLogic ? (
               <>
-                <Property name="Domain" value="Boolean" />
-                <Property name="Arity" value={spec.arity} />
-                <Property name="Result kind" value="Exact" />
-                <Property name="Engine" value={result.engine} />
+                <div className="inspect-equation">
+                  <Formula tex={spec.tex} />
+                </div>
+                <dl className="properties">
+                  <Property name="P" value={truth(state.assignment.p)} />
+                  <Property name="Q" value={truth(state.assignment.q)} />
+                  <Property name="Truth value" value={truth(result.value)} />
+                </dl>
               </>
             ) : (
-              <>
-                <Property name="Environment" value={desktop ? 'Desktop' : 'Web preview'} />
-                <Property name="Storage" value={desktop ? 'SQLite' : 'Browser local'} />
-                <Property name="Version" value={'v' + manifest.version} />
-              </>
-            )}
-          </dl>
-        </section>
-        <section className="inspect-block">
-          <div className="eyebrow">
-            {isLogic ? <CircleDot size={13} /> : <Boxes size={14} />}{' '}
-            {isLogic ? 'Evaluation' : 'Environment index'}
-          </div>
-          {isLogic ? (
-            <>
-              <div className="inspect-equation">
-                <Formula tex={spec.tex} />
-              </div>
-              <dl className="properties">
-                <Property name="P" value={truth(state.assignment.p)} />
-                <Property name="Q" value={truth(state.assignment.q)} />
-                <Property name="Truth value" value={truth(result.value)} />
-              </dl>
-            </>
-          ) : (
-            modules.map((m) => (
-              <div key={m.id} className="index-entry">
-                <span className="live-dot" />
-                <div>
-                  <strong>{m.name}</strong>
-                  <small>{m.field}</small>
+              modules.map((m) => (
+                <div key={m.id} className="index-entry">
+                  <span className="live-dot" />
+                  <div>
+                    <strong>{m.name}</strong>
+                    <small>{m.field}</small>
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
-        </section>
-        <section className="inspect-block">
-          <div className="eyebrow">
-            {isLogic ? <SlidersHorizontal size={13} /> : <Keyboard size={14} />}{' '}
-            {isLogic ? 'Assumptions' : 'Shortcuts'}
-          </div>
-          {isLogic ? (
-            <p>
-              Classical two-valued semantics. P and Q vary independently over the Boolean domain.
-            </p>
-          ) : (
-            <dl className="key-list">
-              <div>
-                <dt>Commands</dt>
-                <dd>
-                  <kbd>⌘ / Ctrl K</kbd>
-                </dd>
-              </div>
-              <div>
-                <dt>Explorer</dt>
-                <dd>
-                  <kbd>⌘ / Ctrl B</kbd>
-                </dd>
-              </div>
-              <div>
-                <dt>Session log</dt>
-                <dd>
-                  <kbd>⌘ / Ctrl J</kbd>
-                </dd>
-              </div>
-            </dl>
-          )}
-        </section>
-      </div>
+              ))
+            )}
+          </section>
+          <section className="inspect-block">
+            <div className="eyebrow">
+              {isLogic ? <SlidersHorizontal size={13} /> : <Keyboard size={14} />}{' '}
+              {isLogic ? 'Assumptions' : 'Shortcuts'}
+            </div>
+            {isLogic ? (
+              <p>
+                Classical two-valued semantics. P and Q vary independently over the Boolean domain.
+              </p>
+            ) : (
+              <dl className="key-list">
+                <div>
+                  <dt>Commands</dt>
+                  <dd>
+                    <kbd>⌘ / Ctrl K</kbd>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Explorer</dt>
+                  <dd>
+                    <kbd>⌘ / Ctrl B</kbd>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Session log</dt>
+                  <dd>
+                    <kbd>⌘ / Ctrl J</kbd>
+                  </dd>
+                </div>
+              </dl>
+            )}
+          </section>
+        </div>
+      )}
     </>
   )
 }

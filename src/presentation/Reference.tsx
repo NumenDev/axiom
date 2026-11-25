@@ -27,15 +27,15 @@ export function Reference({ roadmap }: { roadmap: boolean }) {
       {roadmap ? (
         <>
           <p className="lede">
-            The workspace currently includes the Phase 01 Logic Playground. Later phases are
-            planned.
+            The workspace currently includes Logic Playground and Expression Workbench. Later phases
+            are planned.
           </p>
           <ol className="roadmap">
             {phases.map((phase, i) => (
               <li key={phase}>
                 <span className="phase-no">{String(i + 1).padStart(2, '0')}</span>
                 <strong>{phase}</strong>
-                <small>{i === 0 ? 'Available' : 'Planned'}</small>
+                <small>{i < 2 ? 'Available' : 'Planned'}</small>
               </li>
             ))}
           </ol>
@@ -48,6 +48,12 @@ export function Reference({ roadmap }: { roadmap: boolean }) {
             Open Logic Playground in the explorer. Choose a connective and toggle P or Q. The
             highlighted row shows that assignment in the complete truth table. Select another row to
             inspect it.
+          </p>
+          <h2>Inspect an expression</h2>
+          <p>
+            Open Expression Workbench, enter a numeric expression, and supply values for its
+            variables. Press Ctrl or ⌘ with Enter in the editor to evaluate. Select a tree node or a
+            trace step to inspect its source and value. Expressions last for this session.
           </p>
           <h2>Move around the workspace</h2>
           <p>

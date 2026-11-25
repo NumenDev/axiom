@@ -36,7 +36,7 @@ export function Welcome({ open }: { open: OpenPage }) {
               <h3>{m.name}</h3>
               <p>{m.description}</p>
               <button className="primary" onClick={() => open(m.id)}>
-                Open playground <ArrowRight size={15} />
+                {m.id === 'logic' ? 'Open playground' : 'Open workbench'} <ArrowRight size={15} />
               </button>
             </div>
             <GitFork className="module-watermark" size={74} aria-hidden="true" />
