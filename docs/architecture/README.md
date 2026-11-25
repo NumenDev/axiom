@@ -2,13 +2,14 @@
 
 AXIOM currently has one frontend package and one native crate. Dependency direction follows the work each layer owns.
 
-| Boundary         | Inputs                                         | Outputs and ownership                                                                     |
-| ---------------- | ---------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| Presentation     | User events, module metadata and typed results | Accessible React views, KaTeX markup, short-lived selection, tabs and log                 |
-| Application      | Workspace choices and decoded preferences      | Static environment registry, preference store interface and platform adapter              |
-| Boolean domain   | An operator ID and Boolean P and Q             | Exact Boolean with engine identifier, or a structured input error at the checked boundary |
-| Native host      | Two allowlisted preference commands            | Validated settings in one application-owned SQLite file                                   |
-| Figure rendering | Two angular parameters and fixed radii         | Local orthographic SVG projection with front- and back-facing mesh lines                  |
+| Boundary          | Inputs                                                    | Outputs and ownership                                                                     |
+| ----------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Presentation      | User events, module metadata and typed results            | Accessible React views, KaTeX markup, short-lived selection, tabs and log                 |
+| Application       | Workspace choices and decoded preferences                 | Static environment registry, preference store interface and platform adapter              |
+| Boolean domain    | An operator ID and Boolean P and Q                        | Exact Boolean with engine identifier, or a structured input error at the checked boundary |
+| Expression domain | Source text, v1 syntax records, explicit numeric bindings | Checked parse, versioned exact rational result and bounded trace                          |
+| Native host       | Two allowlisted preference commands                       | Validated settings in one application-owned SQLite file                                   |
+| Figure rendering  | Two angular parameters and fixed radii                    | Local orthographic SVG projection with front- and back-facing mesh lines                  |
 
 The engine imports neither React nor the application layer. Presentation calls its total functions and renders results. The registered module declares its name, field and capabilities. Adding a shipped module requires a concrete engine, a typed capability, independent tests and a presentation entry point. Planned modules appear only in the roadmap.
 
@@ -16,7 +17,7 @@ The engine imports neither React nor the application layer. Presentation calls i
 
 The Phase 01 expression is a closed connective ID applied to P, Q, or both. The domain accepts native Booleans and returns a serializable exact result with `kind`, `value`, and `engine`. The checked input entry point returns `unknown-operator` or `invalid-assignment`. Operator labels, notation, and translations belong to presentation. Each operation is bounded to a single Boolean expression. A table enumerates exactly four assignments.
 
-A future parser should emit a versioned data-only syntax tree with source spans. Specify operator precedence, variable bindings, domains, error codes and size limits before adding textual input. Exact integer or rational values crossing JSON should use canonical strings for large integers and explicit denominators. Numerical approximation requires precision, error information and a rounding policy. A language adapter should consume this contract independently of UI state.
+The expression engine parses text into a v1 postorder node table. Evaluation validates the table against its original source and walks it in order with a Map of explicit bindings. The static registry declares distinct Boolean and rational capabilities. Both results share the structural fields `kind`, `engine` and `value`. Phase 01 Boolean callers retain their original types. The rational result adds a domain and uses decimal strings. Direct calls suffice for these two bounded engines. A future runtime would need its own protocol and isolation. [Expression contract](../mathematics/expressions.md)
 
 ## Storage and lifecycle
 

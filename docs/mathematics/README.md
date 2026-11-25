@@ -22,4 +22,6 @@ Disjunction is inclusive. Material implication equals ¬P ∨ Q, including both 
 | Conjecture            | Statement, assumptions and explicit unverified status         |
 | Formally verified     | Formal statement, checker version and accepted proof artifact |
 
-Only the exact Boolean kind is implemented. Future modules must describe domain errors and runtime failures separately. A finite sample of observations cannot establish a general theorem. Document the mathematical assumptions, prove or test invariants, and make limitations visible at the point of use.
+Both engines produce exact results. The expression engine uses reduced rationals and an integer domain label when the denominator equals one. The operator grammar, checked AST and limits are specified separately. [Expression language v1](expressions.md)
+
+Future modules must describe domain errors and runtime failures separately. A finite sample of observations cannot establish a general theorem. Document the mathematical assumptions, prove or test invariants, and make limitations visible at the point of use.

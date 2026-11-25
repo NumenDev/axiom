@@ -1,6 +1,6 @@
 # Architecture decisions
 
-These decisions apply to Phase 01. Revisit a decision when its stated constraint changes.
+Decisions 001–006 record the Phase 01 foundation. Decisions 007–009 extend the design for Phase 02. Revisit a decision when its stated constraint changes.
 
 ## 001 · Desktop stack
 
