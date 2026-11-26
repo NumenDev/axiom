@@ -1,6 +1,6 @@
 # Working on AXIOM
 
-Read the [architecture](docs/architecture/README.md), [decisions](docs/decisions/README.md), and current [phase report](docs/reports/PHASE_01_REPORT.md) before changing a boundary. The [roadmap](docs/ROADMAP.md) describes future work. Implement a new phase only when authorized.
+Read the [architecture](docs/architecture/README.md), [decisions](docs/decisions/README.md), and current [phase report](docs/reports/PHASE_02_REPORT.md) before changing a boundary. The [roadmap](docs/ROADMAP.md) describes future work. Implement a new phase only when authorized.
 
 - Put total, deterministic mathematical functions in `src/domain`. State each domain and assumption. Give each result an explicit kind. Test all finite cases against independent expectations.
 - Use strict TypeScript and typed Rust commands. Keep platform APIs, storage, and React out of mathematical functions. Register working environments in the static module registry.

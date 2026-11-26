@@ -9,7 +9,11 @@ export default defineConfig({
     projects: [
       {
         extends: true,
-        test: { name: 'domain', environment: 'node', include: ['tests/logic.test.ts'] },
+        test: {
+          name: 'domain',
+          environment: 'node',
+          include: ['tests/logic.test.ts', 'tests/expression*.test.ts'],
+        },
       },
       {
         extends: true,

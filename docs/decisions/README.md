@@ -1,6 +1,6 @@
 # Architecture decisions
 
-These decisions apply to Phase 01. Revisit a decision when its stated constraint changes.
+Decisions 001–006 record the Phase 01 foundation. Decisions 007–009 extend the design for Phase 02. Revisit a decision when its stated constraint changes.
 
 ## 001 · Desktop stack
 
@@ -25,3 +25,15 @@ Accepted. A static, typed registry describes shipped environments and their capa
 ## 006 · Computation isolation
 
 Accepted. The current vocabulary has no executable input and a fixed evaluation bound. Future untrusted computation requires a separate restricted process, a versioned data-only protocol, cancellation IDs, wall-clock deadlines, memory and output limits, and termination on timeout. Interactive notebook execution is deferred until isolation can be verified on each target OS.
+
+## 007 · Expression parser and source identity
+
+Accepted for Phase 02. Recursive descent maps each precedence level to a grammar production. Iterative left folds and a signed right operand for power express the asymmetric precedence of unary minus. Pratt parsing and precedence climbing would suit a larger operator table, but require additional binding-power conventions for these five operators. Keep parentheses and original text for the source inspector.
+
+## 008 · Exact numbers and execution boundary
+
+Accepted. Use reduced BigInt fractions in the pure TypeScript domain, with decimal strings on the wire. Integer powers use bounded repeated squaring. Check arithmetic and output budgets during evaluation. Retain the Boolean API and register the rational engine separately. Neither requires native IPC. Version any future changes to language meaning or wire identity.
+
+## 009 · Interchange and trace
+
+Accepted. Flat postorder nodes make references, child-before-parent evaluation and source selection explicit. The validated source determines the entire table. Re-parsing during import costs a bounded extra parse and prevents a document from displaying one expression while evaluating another. Record inputs and outputs at the point of calculation. A trace omits redundant group records and never needs a full expression copy per operation.

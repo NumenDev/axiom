@@ -18,3 +18,9 @@ Plex Sans sets interface copy. Plex Mono distinguishes technical metadata, sizes
 Use the existing icon button, formula renderer and splitter. Keep Lucide stroke weights consistent. Space related controls in 4–8 px increments and delimit sections with a single rule. Labels and state changes include text or semantics as well as color. Provide a visible keyboard focus ring, a named switch or button and a reachable way to dismiss each overlay.
 
 The welcome plate plots a mathematical torus. Its caption corresponds to the parameters in the workspace guide. The logic view puts the expression, exactness, selected assignment and complete truth table in the same reading order. Future approximations need a visible precision or error statement. Formal verification needs an inspectable proof artifact. The UI may only advertise modules present in the shipped registry.
+
+## Expression Workbench
+
+A native textarea supports text selection, assistive technology and the same UTF-16 range model as the parser. Its Evaluate button and Ctrl/⌘ + Enter shortcut share a handler. A selected range appears next to the editor and can be focused directly. Source or binding edits clear prior results and traces. A rejected oversized edit explicitly identifies the retained source. The preview can remain available through numeric errors.
+
+The reading panel pairs blue notation with the exact numeric value. An adjacent control copies its canonical text. Tree and trace views share the compiler's node IDs with the inspector. The tree uses semantic nested lists, keyboard-operable buttons and CSS branch lines. Large trees use expandable subtrees. The trace initially shows twelve chronological operations and can be expanded in batches. The central document and long notation have local scrolling. Panel drawers use the existing shell breakpoints.
