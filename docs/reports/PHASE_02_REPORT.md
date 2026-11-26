@@ -99,7 +99,9 @@ The before/after Cargo.lock SHA-256 values are `9134e612bb32300ce58042102d0462a8
 
 ## Publication
 
-The engineering commits are `c0660eb` (language, engine and oracle), `a8d0a32` (workbench and integration) `29d62cf` (review corrections) and `6e718ec` (SQLite dependency upgrade). Publication and hosted job results are recorded with the review link below.
+The development branch is published for review against main. Commit `c0660eb` implements the language, engine and oracle. Commit `a8d0a32` integrates the workbench, `29d62cf` addresses source-review findings, `6e718ec` upgrades bundled SQLite and `1a4a6bb` records the local verification and screenshots. [Pull request #1](https://github.com/NumenDev/axiom/pull/1)
+
+**Hosted CI status.** The badge tracks the latest Verify workflow for this branch. The PR checks page records the frontend and desktop job results for the current revision. [![Verify workflow status](https://github.com/NumenDev/axiom/actions/workflows/verify.yml/badge.svg?branch=feat%2Fphase-02-expression-engine&event=push)](https://github.com/NumenDev/axiom/actions/workflows/verify.yml?query=branch%3Afeat%2Fphase-02-expression-engine) · [Current PR checks](https://github.com/NumenDev/axiom/pull/1/checks) · [Initial PR verification](https://github.com/NumenDev/axiom/actions/runs/45798696649)
 
 ## Proposed Phase 03 scope and acceptance
 
